@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Essentials | Ultra-Premium Household Concierge</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --midnight: #020617;
+            --sapphire: #0f172a;
+            --primary: #0ea5e9;
+            --secondary: #6366f1;
+            --accent: #f43f5e;
+            --slate-50: rgba(248, 250, 252, 0.05);
+            --slate-100: rgba(241, 245, 249, 0.1);
+            --slate-200: rgba(226, 232, 240, 0.2);
+            --slate-400: #94a3b8;
+            --slate-600: #475569;
+            --slate-800: #1e293b;
+            --white: #ffffff;
+            
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --shadow-premium: 0 30px 60px -12px rgba(0, 0, 0, 0.2), 0 18px 36px -18px rgba(0, 0, 0, 0.25);
+
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline-color: var(--primary);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--midnight);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--slate-100);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 140px; /* Space for top navs */
+        }
+
+        @media (min-width: 1025px) {
+            body { padding-top: 0; }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Animated Mesh Background */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.08) 0%, transparent 60%);
+            animation: meshFloat 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes meshFloat {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(2%, 2%); }
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            color: var(--white);
+            line-height: 1.1;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradientMove 5s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 16px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.4s var(--ease-out-expo);
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--midnight);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            background: var(--slate-100);
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .w-full { width: 100%; }
+
+        /* Navigation Header */
+        header {
+            position: fixed;
+            top: 16px;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 22px;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 92%;
+        }
+
+        @media (min-width: 768px) {
+            .header-inner { width: auto; border-radius: 28px; padding: 10px 24px; }
+            header { top: 24px; }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--white);
+        }
+
+        .logo-box {
+            width: 36px;
+            height: 36px;
+            background: var(--white);
+            color: var(--midnight);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .phone-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-weight: 800;
+            color: var(--white);
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 100px;
+        }
+
+        .phone-link i { color: var(--primary); }
+
+        .desktop-nav { display: none; }
+        @media (min-width: 1025px) { .desktop-nav { display: flex; gap: 28px; } }
+
+        /* Mobile Top Navigation */
+        .mobile-top-nav {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        @media (min-width: 1025px) { .mobile-top-nav { display: none; } }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--slate-400);
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .nav-item.active { color: var(--white); }
+        .nav-item i { width: 18px; height: 18px; }
+
+        /* Sections */
+        .hero { padding: 80px 0 60px; text-align: center; }
+        @media (min-width: 1025px) { .hero { padding: 260px 0 140px; } }
+
+        .section-padding { padding: 60px 0; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-size: clamp(2rem, 5vw, 4rem); }
+
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+        @media (min-width: 768px) { .bento-grid { gap: 28px; } }
+
+        .bento-card {
+            grid-column: span 12;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.4s;
+        }
+
+        @media (min-width: 768px) { .bento-card { grid-column: span 4; border-radius: 44px; padding: 52px; } }
+        .bento-card:hover { transform: translateY(-8px); }
+
+        /* "Join the Inner Circle" Refined Centered Form */
+        .booking-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        @media (min-width: 1025px) {
+            .booking-section { margin: 140px 0; }
+        }
+
+        .booking-info {
+            max-width: 700px;
+            margin-bottom: 48px;
+        }
+
+        .booking-info h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .booking-info p { color: var(--slate-400); font-size: 1.1rem; }
+
+        .stats { display: flex; gap: 32px; margin-top: 32px; justify-content: center; }
+        .stat-val { font-size: 2rem; font-weight: 900; color: var(--white); }
+        .stat-lbl { color: var(--slate-400); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; display: block; }
+
+        /* Another Box Container for Form */
+        #form-container {
+            width: 100%;
+            max-width: 540px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 32px 20px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        @media (min-width: 768px) {
+            #form-container { padding: 52px 40px; }
+        }
+
+        .form-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: left;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .form-box:focus-within {
+            border-color: var(--primary);
+            transform: scale(1.02);
+        }
+
+        .field label {
+            display: block;
+            font-weight: 800;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: var(--slate-400);
+        }
+
+        input, select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        input::placeholder { color: rgba(255,255,255,0.2); }
+        select option { background: var(--midnight); color: var(--white); }
+
+        .submit-box {
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin-top: 8px;
+        }
+
+        /* About Section */
+        .about-content {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 40px 24px;
+            display: grid;
+            gap: 40px;
+        }
+        @media (min-width: 1025px) { .about-content { padding: 80px; border-radius: 56px; grid-template-columns: 1fr 1fr; } }
+
+        .feature-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
+        .feature-icon { color: var(--primary); }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(20px);
+            padding: 80px 0;
+            border-radius: 40px 40px 0 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        /* Reveal & Toast */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-out-expo); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .hidden { display: none !important; }
+
+        #toast-container { position: fixed; top: 150px; right: 20px; left: 20px; z-index: 3000; pointer-events: none; }
+        @media (min-width: 768px) { #toast-container { top: 40px; right: 40px; left: auto; } }
+        .toast { background: rgba(15, 23, 42, 0.95); padding: 14px 20px; border-radius: 14px; margin-top: 10px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); color: white; }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(32px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 40px; max-width: 500px; width: 100%; color: white; }
+    </style>
+</head>
+<body id="home">
+    <div class="mesh-bg"></div>
+    <div class="noise-overlay"></div>
+    <div id="toast-container"></div>
+
+    <!-- Mobile Top Navigation Bar -->
+    <nav class="mobile-top-nav">
+        <a href="#home" class="nav-item active">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#offerings" class="nav-item">
+            <i data-lucide="layers"></i>
+            <span>Services</span>
+        </a>
+        <a href="#about" class="nav-item">
+            <i data-lucide="user-check"></i>
+            <span>About</span>
+        </a>
+        <a href="#book" class="nav-item">
+            <i data-lucide="mail"></i>
+            <span>Contact</span>
+        </a>
+    </nav>
+
+    <header id="main-header">
+        <div class="header-inner">
+            <a href="#home" class="logo" id="logo-btn">
+                <div class="logo-box"><i data-lucide="droplet"></i></div>
+                <span>ESSENTIALS</span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="#offerings" class="nav-link">Offerings</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#book" class="nav-link">Concierge</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="tel:0511234567" class="phone-link">
+                    <i data-lucide="phone"></i>
+                    <span>051 123 4567</span>
+                </a>
+                <a href="#book" class="btn btn-primary desktop-nav">Request Service</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero container">
+            <div class="hero-badge reveal">
+                <i data-lucide="crown" size="14"></i> Bloemfontein's Exclusive Concierge
+            </div>
+            <h1 class="reveal">Master Your <br><span class="text-gradient">Home Logistics.</span></h1>
+            <p class="reveal">Ultra-pure water delivery and elite household errands for Central, Universitas, and Dan Pienaar's residents.</p>
+            <div class="reveal hero-btns">
+                <button class="btn btn-primary" id="priority-btn">Priority Application <i data-lucide="sparkles"></i></button>
+                <button class="btn btn-glass" id="explore-btn">Offerings</button>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="offerings" class="container section-padding">
+            <div class="section-header reveal">
+                <h2>The <span class="text-gradient">Essentials Protocol.</span></h2>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-card reveal">
+                    <div class="icon-accent" style="background: rgba(14, 165, 233, 0.2); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--primary);">
+                        <i data-lucide="droplets" size="30"></i>
+                    </div>
+                    <h3>Pure Stream</h3>
+                    <p>Clinical-grade RO water purification, delivered and refilled seamlessly.</p>
+                    <button class="btn btn-glass w-full card-action" data-type="water">Pricing Details</button>
+                </div>
+
+                <div class="bento-card reveal" style="background: rgba(255, 255, 255, 0.1);">
+                    <div class="icon-accent" style="background: rgba(255, 255, 255, 0.2); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: white;">
+                        <i data-lucide="shopping-bag" size="30"></i>
+                    </div>
+                    <h3>City Runner</h3>
+                    <p>Elite shopping concierge. We source the finest produce while you focus on life.</p>
+                    <button class="btn btn-glass w-full card-action" data-type="errand">Book Runner</button>
+                </div>
+
+                <div class="bento-card reveal">
+                    <div class="icon-accent" style="background: rgba(244, 63, 94, 0.2); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; color: var(--accent);">
+                        <i data-lucide="flame" size="30"></i>
+                    </div>
+                    <h3>Cuisine Direct</h3>
+                    <p>Restaurant-quality takeaway delivery with thermal preservation technology.</p>
+                    <button class="btn btn-glass w-full card-action" data-type="food">Service Map</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="container section-padding">
+            <div class="section-header reveal">
+                <h2>Beyond <span class="text-gradient">Delivery.</span></h2>
+            </div>
+            
+            <div class="about-content reveal">
+                <div class="about-text">
+                    <h2>Our Story.</h2>
+                    <p>Essentials was born from a simple observation: time is the ultimate luxury. We saw busy Bloemfontein households struggling to balance quality nutrition with hectic schedules.</p>
+                    <p>Today, we operate as a precision-led logistics partner, ensuring that your home is always stocked with purified water and fresh essentials.</p>
+                </div>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i data-lucide="award" class="feature-icon"></i>
+                        <div>
+                            <h4>Elite Standard</h4>
+                            <p>Select residential zones for sub-15 minute dispatch times.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="shield-check" class="feature-icon"></i>
+                        <div>
+                            <h4>Security Focused</h4>
+                            <p>Vetted concierges and secure WhatsApp verification.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration Experience (Refined) -->
+        <section id="book" class="container section-padding">
+            <div class="booking-section reveal">
+                <div class="booking-info">
+                    <h2>Join the <br><span class="text-gradient">Inner Circle.</span></h2>
+                    <p>We maintain a strict client-to-concierge ratio. Register below for availability.</p>
+                    <div class="stats">
+                        <div>
+                            <span class="stat-val">480</span>
+                            <span class="stat-lbl">Homes</span>
+                        </div>
+                        <div>
+                            <span class="stat-val">99%</span>
+                            <span class="stat-lbl">Uptime</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="form-container">
+                    <form id="booking-form" class="form-boxes">
+                        <div class="form-box">
+                            <div class="field">
+                                <label>Client Name</label>
+                                <input type="text" placeholder="Sarah Johnson" required>
+                            </div>
+                        </div>
+                        <div class="form-box">
+                            <div class="field">
+                                <label>WhatsApp Contact</label>
+                                <input type="tel" placeholder="082 000 0000" required>
+                            </div>
+                        </div>
+                        <div class="form-box">
+                            <div class="field">
+                                <label>Priority Access</label>
+                                <select required>
+                                    <option>Water + Runner Bundle</option>
+                                    <option>Water Only</option>
+                                    <option>Runner Exclusive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-box submit-box">
+                            <button type="submit" class="btn btn-primary w-full">Request Membership</button>
+                        </div>
+                    </form>
+                    <div id="success-state" class="hidden" style="text-align: center; padding: 40px; background: rgba(16, 185, 129, 0.1); border-radius: 24px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                        <i data-lucide="check-circle" size="48" style="color: #10b981; margin-bottom: 16px;"></i>
+                        <h3>Application Logged</h3>
+                        <p style="color: var(--slate-400); margin-top: 10px;">A concierge will verify your address shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Essentials Group. Precision Logistics.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-card">
+            <button id="close-modal" style="background:transparent; border:none; color:white; float:right; cursor:pointer;"><i data-lucide="x"></i></button>
+            <h2 id="modal-title">Details</h2>
+            <div id="modal-body" style="margin: 30px 0; color: var(--slate-400);"></div>
+            <button class="btn btn-primary w-full" onclick="document.getElementById('modal-overlay').style.display='none'">Confirm</button>
+        </div>
+    </div>
+
+    <script type="module">
+        const showToast = (message) => {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        };
+
+        const modalData = {
+            water: { title: "Pure Stream Tiering", body: "10L Refill: R38.00<br>25L Refill: R65.00<br>Monthly Unlimited: R550.00" },
+            errand: { title: "Concierge Runner", body: "Base Run: R50.00<br>Delivery (with water): FREE" },
+            food: { title: "Cuisine Direct", body: "Central: R40.00<br>Universitas: R55.00" }
+        };
+
+        const init = () => {
+            if (window.lucide) window.lucide.createIcons();
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Sync nav for section items
+                        const id = entry.target.id;
+                        if(id) {
+                            document.querySelectorAll('.nav-item').forEach(item => {
+                                item.classList.toggle('active', item.getAttribute('href') === `#${id}`);
+                            });
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            document.querySelectorAll('.card-action').forEach(btn => {
+                btn.onclick = () => {
+                    const type = btn.dataset.type;
+                    document.getElementById('modal-title').innerText = modalData[type].title;
+                    document.getElementById('modal-body').innerHTML = modalData[type].body;
+                    document.getElementById('modal-overlay').style.display = 'flex';
+                };
+            });
+
+            document.getElementById('close-modal').onclick = () => document.getElementById('modal-overlay').style.display = 'none';
+
+            const form = document.getElementById('booking-form');
+            if (form) {
+                form.onsubmit = (e) => {
+                    e.preventDefault();
+                    showToast('Transmitting application...');
+                    setTimeout(() => {
+                        form.classList.add('hidden');
+                        document.getElementById('success-state').classList.remove('hidden');
+                    }, 1200);
+                };
+            }
+
+            document.getElementById('priority-btn').onclick = () => document.getElementById('book').scrollIntoView({behavior:'smooth'});
+            document.getElementById('explore-btn').onclick = () => document.getElementById('offerings').scrollIntoView({behavior:'smooth'});
+        };
+
+        window.onload = init;
+    </script>
+</body>
+</html>
