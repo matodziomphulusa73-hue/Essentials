@@ -99,12 +99,18 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Typography */
+        /* Typography Spacing */
         h1, h2, h3 {
             font-weight: 800;
             letter-spacing: -0.05em;
             color: var(--white);
             line-height: 1.1;
+            margin-bottom: 24px; /* Enhanced spacing */
+        }
+
+        p {
+            margin-bottom: 20px; /* Enhanced spacing between paragraphs */
+            color: var(--slate-400);
         }
 
         .text-gradient {
@@ -121,6 +127,7 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Buttons & Hovers */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -130,7 +137,7 @@
             border-radius: 16px;
             font-weight: 800;
             text-decoration: none;
-            transition: all 0.4s var(--ease-out-expo);
+            transition: all 0.3s var(--ease-out-expo);
             cursor: pointer;
             border: 1px solid transparent;
             font-size: 0.9rem;
@@ -145,7 +152,9 @@
 
         .btn-primary:hover {
             transform: translateY(-4px);
-            background: var(--slate-100);
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
         }
 
         .btn-glass {
@@ -154,6 +163,13 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--white);
+        }
+
+        .btn-glass:hover {
+            background: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
         }
 
         .w-full { width: 100%; }
@@ -220,12 +236,27 @@
             background: rgba(255, 255, 255, 0.1);
             padding: 6px 12px;
             border-radius: 100px;
+            transition: all 0.3s;
         }
+        .phone-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .phone-link:hover i { color: white; }
 
-        .phone-link i { color: var(--primary); }
+        .phone-link i { color: var(--primary); transition: color 0.3s; }
 
         .desktop-nav { display: none; }
-        @media (min-width: 1025px) { .desktop-nav { display: flex; gap: 28px; } }
+        @media (min-width: 1025px) { 
+            .desktop-nav { display: flex; gap: 28px; }
+            .nav-link {
+                text-decoration: none;
+                color: var(--slate-400);
+                font-weight: 600;
+                transition: color 0.3s;
+            }
+            .nav-link:hover { color: var(--white); }
+        }
 
         /* Mobile Top Navigation */
         .mobile-top-nav {
@@ -261,11 +292,18 @@
         }
 
         .nav-item.active { color: var(--white); }
+        .nav-item:hover { color: var(--primary); }
         .nav-item i { width: 18px; height: 18px; }
 
         /* Sections */
         .hero { padding: 80px 0 60px; text-align: center; }
         @media (min-width: 1025px) { .hero { padding: 260px 0 140px; } }
+
+        .hero p {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 720px;
+        }
 
         .section-padding { padding: 60px 0; }
         .section-header { text-align: center; margin-bottom: 40px; }
@@ -281,13 +319,50 @@
             border-radius: 32px;
             padding: 32px;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.4s;
+            transition: all 0.4s;
+            text-align: left;
         }
 
         @media (min-width: 768px) { .bento-card { grid-column: span 4; border-radius: 44px; padding: 52px; } }
-        .bento-card:hover { transform: translateY(-8px); }
+        .bento-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.2); }
 
-        /* "Join the Inner Circle" Refined Centered Form */
+        /* About Section (Beyond Delivery) Centered */
+        .about-content {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 32px;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 40px;
+        }
+        @media (min-width: 1025px) { .about-content { padding: 80px; border-radius: 56px; } }
+
+        .about-text {
+            max-width: 800px;
+        }
+
+        .about-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            width: 100%;
+        }
+
+        .feature-item { 
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            gap: 16px; 
+            margin-bottom: 0;
+            max-width: 320px;
+        }
+        .feature-icon { color: var(--primary); }
+
+        /* Booking Section Refined */
         .booking-section {
             display: flex;
             flex-direction: column;
@@ -300,23 +375,10 @@
             .booking-section { margin: 140px 0; }
         }
 
-        .booking-info {
-            max-width: 700px;
-            margin-bottom: 48px;
-        }
-
-        .booking-info h2 { font-size: 2.5rem; margin-bottom: 20px; }
-        .booking-info p { color: var(--slate-400); font-size: 1.1rem; }
-
-        .stats { display: flex; gap: 32px; margin-top: 32px; justify-content: center; }
-        .stat-val { font-size: 2rem; font-weight: 900; color: var(--white); }
-        .stat-lbl { color: var(--slate-400); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; display: block; }
-
-        /* Another Box Container for Form */
         #form-container {
             width: 100%;
             max-width: 540px;
-            margin: 0 auto;
+            margin: 0 20px; /* Space between edges */
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(32px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -342,82 +404,71 @@
             border-radius: 20px;
             padding: 20px;
             text-align: left;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: all 0.3s;
         }
 
         .form-box:focus-within {
             border-color: var(--primary);
+            background: rgba(255,255,255,0.06);
             transform: scale(1.02);
         }
 
-        .field label {
-            display: block;
-            font-weight: 800;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            color: var(--slate-400);
-        }
-
-        input, select {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: var(--white);
-            font-family: inherit;
-            font-size: 0.95rem;
-            font-weight: 600;
-            outline: none;
-        }
-
-        input::placeholder { color: rgba(255,255,255,0.2); }
-        select option { background: var(--midnight); color: var(--white); }
-
-        .submit-box {
-            background: transparent;
-            border: none;
-            padding: 0;
-            margin-top: 8px;
-        }
-
-        /* About Section */
-        .about-content {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 32px;
-            padding: 40px 24px;
-            display: grid;
-            gap: 40px;
-        }
-        @media (min-width: 1025px) { .about-content { padding: 80px; border-radius: 56px; grid-template-columns: 1fr 1fr; } }
-
-        .feature-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
-        .feature-icon { color: var(--primary); }
-
-        /* Footer */
+        /* Footer Expansion */
         footer {
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(20px);
-            padding: 80px 0;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(40px);
+            padding: 80px 0 40px;
             border-radius: 40px 40px 0 0;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 100px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a {
+            color: var(--slate-400);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .footer-col ul li a:hover { color: var(--primary); }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
             text-align: center;
         }
 
-        /* Reveal & Toast */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-out-expo); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .hidden { display: none !important; }
+        .dev-credit {
+            font-size: 0.75rem;
+            color: var(--slate-600);
+            margin-top: 20px;
+            letter-spacing: 0.5px;
+        }
 
-        #toast-container { position: fixed; top: 150px; right: 20px; left: 20px; z-index: 3000; pointer-events: none; }
-        @media (min-width: 768px) { #toast-container { top: 40px; right: 40px; left: auto; } }
-        .toast { background: rgba(15, 23, 42, 0.95); padding: 14px 20px; border-radius: 14px; margin-top: 10px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1); color: white; }
+        .dev-credit strong { color: var(--slate-400); }
 
+        /* Modal fixes */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(2, 6, 23, 0.9);
+            background: rgba(2, 6, 23, 0.95);
             backdrop-filter: blur(32px);
             z-index: 2000;
             display: none;
@@ -425,7 +476,20 @@
             justify-content: center;
             padding: 24px;
         }
-        .modal-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px; padding: 40px; max-width: 500px; width: 100%; color: white; }
+        .modal-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 40px; 
+            padding: 40px; 
+            max-width: 500px; 
+            width: 100%; 
+            color: white; 
+            box-shadow: var(--shadow-premium);
+        }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-out-expo); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body id="home">
@@ -483,7 +547,7 @@
                 <i data-lucide="crown" size="14"></i> Bloemfontein's Exclusive Concierge
             </div>
             <h1 class="reveal">Master Your <br><span class="text-gradient">Home Logistics.</span></h1>
-            <p class="reveal">Ultra-pure water delivery and elite household errands for Central, Universitas, and Dan Pienaar's residents.</p>
+            <p class="reveal">Ultra-pure water delivery and elite household errands for Central, Universitas, and Dan Pienaar's residents. Precision logistics for a seamless lifestyle.</p>
             <div class="reveal hero-btns">
                 <button class="btn btn-primary" id="priority-btn">Priority Application <i data-lucide="sparkles"></i></button>
                 <button class="btn btn-glass" id="explore-btn">Offerings</button>
@@ -502,7 +566,7 @@
                         <i data-lucide="droplets" size="30"></i>
                     </div>
                     <h3>Pure Stream</h3>
-                    <p>Clinical-grade RO water purification, delivered and refilled seamlessly.</p>
+                    <p>Clinical-grade RO water purification, delivered and refilled seamlessly at your convenience.</p>
                     <button class="btn btn-glass w-full card-action" data-type="water">Pricing Details</button>
                 </div>
 
@@ -511,7 +575,7 @@
                         <i data-lucide="shopping-bag" size="30"></i>
                     </div>
                     <h3>City Runner</h3>
-                    <p>Elite shopping concierge. We source the finest produce while you focus on life.</p>
+                    <p>Elite shopping concierge. We source the finest produce while you focus on what matters most.</p>
                     <button class="btn btn-glass w-full card-action" data-type="errand">Book Runner</button>
                 </div>
 
@@ -520,7 +584,7 @@
                         <i data-lucide="flame" size="30"></i>
                     </div>
                     <h3>Cuisine Direct</h3>
-                    <p>Restaurant-quality takeaway delivery with thermal preservation technology.</p>
+                    <p>Restaurant-quality takeaway delivery with advanced thermal preservation technology.</p>
                     <button class="btn btn-glass w-full card-action" data-type="food">Service Map</button>
                 </div>
             </div>
@@ -536,33 +600,41 @@
                 <div class="about-text">
                     <h2>Our Story.</h2>
                     <p>Essentials was born from a simple observation: time is the ultimate luxury. We saw busy Bloemfontein households struggling to balance quality nutrition with hectic schedules.</p>
-                    <p>Today, we operate as a precision-led logistics partner, ensuring that your home is always stocked with purified water and fresh essentials.</p>
+                    <p>Our mission is to provide zero-friction logistics. Today, we operate as a precision-led partner, ensuring that your home is always stocked with purified water and fresh essentials.</p>
+                    <p>We pride ourselves on punctuality, purity, and personalized care for every one of our members.</p>
                 </div>
                 <div class="about-features">
                     <div class="feature-item">
-                        <i data-lucide="award" class="feature-icon"></i>
+                        <i data-lucide="award" class="feature-icon" size="32"></i>
                         <div>
                             <h4>Elite Standard</h4>
                             <p>Select residential zones for sub-15 minute dispatch times.</p>
                         </div>
                     </div>
                     <div class="feature-item">
-                        <i data-lucide="shield-check" class="feature-icon"></i>
+                        <i data-lucide="shield-check" class="feature-icon" size="32"></i>
                         <div>
                             <h4>Security Focused</h4>
-                            <p>Vetted concierges and secure WhatsApp verification.</p>
+                            <p>Vetted concierges and secure WhatsApp verification for every delivery.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i data-lucide="zap" class="feature-icon" size="32"></i>
+                        <div>
+                            <h4>Logistics Bundle</h4>
+                            <p>Free delivery on groceries when paired with a water refill order.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Registration Experience (Refined) -->
+        <!-- Registration Experience -->
         <section id="book" class="container section-padding">
             <div class="booking-section reveal">
                 <div class="booking-info">
                     <h2>Join the <br><span class="text-gradient">Inner Circle.</span></h2>
-                    <p>We maintain a strict client-to-concierge ratio. Register below for availability.</p>
+                    <p>We maintain a strict client-to-concierge ratio. Register below for availability in your specific residential zone.</p>
                     <div class="stats">
                         <div>
                             <span class="stat-val">480</span>
@@ -606,7 +678,7 @@
                     <div id="success-state" class="hidden" style="text-align: center; padding: 40px; background: rgba(16, 185, 129, 0.1); border-radius: 24px; border: 1px solid rgba(16, 185, 129, 0.2);">
                         <i data-lucide="check-circle" size="48" style="color: #10b981; margin-bottom: 16px;"></i>
                         <h3>Application Logged</h3>
-                        <p style="color: var(--slate-400); margin-top: 10px;">A concierge will verify your address shortly.</p>
+                        <p style="color: var(--slate-400); margin-top: 10px;">A lead concierge will verify your address via WhatsApp shortly.</p>
                     </div>
                 </div>
             </div>
@@ -615,7 +687,46 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Essentials Group. Precision Logistics.</p>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#home" class="logo" style="margin-bottom: 24px;">
+                        <div class="logo-box"><i data-lucide="droplet"></i></div>
+                        <span>ESSENTIALS</span>
+                    </a>
+                    <p>Elite household logistics for Bloemfontein's premium residential zones. Precision. Purity. Peace of mind.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#offerings">Pure Stream Water</a></li>
+                        <li><a href="#offerings">City Runner Shopping</a></li>
+                        <li><a href="#offerings">Cuisine Direct Delivery</a></li>
+                        <li><a href="#offerings">Bundle Protocol</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Our Mission</a></li>
+                        <li><a href="#book">Membership Access</a></li>
+                        <li><a href="#book">Service Zones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacts</h4>
+                    <ul>
+                        <li><a href="tel:0511234567"><i data-lucide="phone" size="14"></i> 051 123 4567</a></li>
+                        <li><a href="#"><i data-lucide="message-square" size="14"></i> WhatsApp Secure</a></li>
+                        <li><a href="#"><i data-lucide="map-pin" size="14"></i> Bloemfontein, RSA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Essentials Group. All Rights Reserved.</p>
+                <p class="dev-credit">Website Developed by <strong>Code and Canvas Digital Solutions</strong></p>
+            </div>
         </div>
     </footer>
 
@@ -644,9 +755,9 @@
         };
 
         const modalData = {
-            water: { title: "Pure Stream Tiering", body: "10L Refill: R38.00<br>25L Refill: R65.00<br>Monthly Unlimited: R550.00" },
-            errand: { title: "Concierge Runner", body: "Base Run: R50.00<br>Delivery (with water): FREE" },
-            food: { title: "Cuisine Direct", body: "Central: R40.00<br>Universitas: R55.00" }
+            water: { title: "Pure Stream Tiering", body: "10L High-Purity Refill: R38.00<br>25L Premium Refill: R65.00<br>Monthly Unlimited Plan: R550.00" },
+            errand: { title: "Concierge Runner", body: "Base Errand Run: R50.00<br>Logistics Fee (with water): FREE<br>Retailers: Woolworths, Spar, Checkers." },
+            food: { title: "Cuisine Direct", body: "Central Transit: R40.00<br>Universitas Extension: R55.00<br>Dan Pienaar Protocol: R45.00" }
         };
 
         const init = () => {
@@ -656,8 +767,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        
-                        // Sync nav for section items
                         const id = entry.target.id;
                         if(id) {
                             document.querySelectorAll('.nav-item').forEach(item => {
@@ -686,10 +795,11 @@
             if (form) {
                 form.onsubmit = (e) => {
                     e.preventDefault();
-                    showToast('Transmitting application...');
+                    showToast('Transmitting secure application...');
                     setTimeout(() => {
                         form.classList.add('hidden');
                         document.getElementById('success-state').classList.remove('hidden');
+                        if (window.lucide) window.lucide.createIcons();
                     }, 1200);
                 };
             }
